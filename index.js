@@ -10,6 +10,7 @@ function getParksinfo(searchTerm, maxResults=10){
     const params = {
     stateCode : searchTerm,
     api_key : apikey,
+    limit: maxResults,
     };
     const queryString = formatParams(params)
     const url = searchURL + '?' + queryString;
@@ -29,10 +30,13 @@ function getParksinfo(searchTerm, maxResults=10){
 }
 
 function displayResults(responseJson) {
-$('results-list').empty();
-for (let i=0; i< responseJson.items.length; i++){
-    $('results-list').append(
-        `<li><h3>${responseJson.items[i].fullName}</h3></li>`
+$('#results-list').empty();
+console.log(responseJson);
+for (let i=0; i< responseJson.data.length; i++){
+    $('#results-list').append(
+        `<li><h3>${responseJson.data[i].fullName}</h3></li>
+        <li><p>${responseJson.data[i].description}</p>
+        <a href="${responseJson.data[i].url}"> Link to website</a>`
     )};
 $('#results').removeClass('hidden');
 }
