@@ -12,8 +12,10 @@ function getParksinfo(searchTerm, maxResults=10){
     api_key : apikey,
     limit: maxResults,
     };
+    console.log(searchTerm);
     const queryString = formatParams(params)
-    const url = searchURL + '?' + queryString;
+    let  url = searchURL + '?' + queryString;
+    url = url.replace(" ","");
     console.log(url);
 
     fetch(url)
@@ -55,6 +57,7 @@ function watchForm(){
         const searchTerm = $('#js-search-state').val();
         const maxResults = $('#js-max-results').val();
         console.log(searchTerm);
+        searchTerm.split(" ").join("");
         getParksinfo(searchTerm, maxResults);
 
     });
